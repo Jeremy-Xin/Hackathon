@@ -17,13 +17,15 @@ positionChanger = models.SwimPositionChanger(swimmingPool)
 
 @main.route('/', methods=['GET'])
 def index():
-	param_dict = {"name": "Jeremy"}
-	return render_template('index.html', params=param_dict)
+	return render_template('index.html')
 
+@main.route('/introduction', methods=['GET'])
+def introduce():
+	return render_template('intro.html')
 
-@main.route('/swimming', methods=['GET'])
-def swimming():
-	return render_template('swimming.html')
+@main.route('/demo', methods=['GET'])
+def demo():
+	return render_template('demo.html')
 
 
 @main.route('/add', methods=['GET', 'POST'])

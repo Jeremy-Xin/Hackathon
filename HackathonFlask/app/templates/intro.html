@@ -1,0 +1,130 @@
+{% extends "layout.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="/static/css/customize.css">
+{% endblock %}
+
+{% block js %}
+{% endblock %}
+
+{% block body %}
+        <section class="p-xs-y-8 border-t border-b bg-soft">
+            <div class="container">
+                <h1 class="constrain text-jumbo text-center m-xs-b-6">
+                    Severel Features
+                </h1>
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-4">
+                        <div class="p-xs-b-6 p-md-y-6 p-lg-x-8 text-l">
+                            <ul class="feature-list">
+                                <li>body_temperature</li>
+                                <li>blood_pressure</li>
+                                <li>heart_rate</li>
+                                <li>breathing_rate</li>
+                                <li>vertical_speed</li>
+                                <li>horizontal_speed</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3 p-xs-t-6">
+                        <img src="/static/img/heartbeat.png" style="width: 200px">
+                    </div>
+                    <div class="col-md-3 p-xs-t-6">
+                        <img src="/static/img/temperate.png" style="height: 200px">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="p-xs-y-8 border-b bg-light">
+            <div class="container">
+                <h1 class="constrain text-jumbo text-center m-xs-b-6">
+                    Classification
+                </h1>
+                <div class="row">
+                    <!-- <div class="col-md-1"></div> -->
+                    <div class="col-md-5">
+                        <div class="p-xs-b-6 p-md-y-6 p-lg-x-8 text-l">
+                            <p class="m-xs-t-6" style="padding-top: 100px;">
+                                As we mentioned just now, we are receiving some data from the bracelet.
+                                And do the judge whether the swimmer is in danger(drowning) or not. Actually it is an classification problem. To visualize the classification, I pick two of the features and plot them.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-7 p-xs-t-6">
+                        <img src="/static/img/scatter.png" style="width: 600px">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="p-xs-y-8 border-b bg-soft">
+            <div class="container">
+                <h3 class="constrain text-jumbo text-center m-xs-b-6">
+                    Feature we picked up AND Some samples
+                </h3>
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>body_temperature</th>
+                                    <th>blood_pressure</th>
+                                    <th>heart_rate</th>
+                                    <th>breathing_rate</th>
+                                    <th>vertical_speed</th>
+                                    <th>horizontal_speed</th>
+                                    <th>drowning</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><th>1</th><td>37.2</td><td>110.0</td><td>102.1</td><td>12.2</td><td>1.0</td><td>0.9</td></tr>
+                                <tr><th>2</th><td>37.2</td><td>110.0</td><td>102.1</td><td>12.2</td><td>1.0</td><td>0.9</td></tr>
+                                <tr><th>3</th><td>37.2</td><td>110.0</td><td>102.1</td><td>12.2</td><td>1.0</td><td>0.9</td></tr>
+                                <tr><th>4</th><td>37.2</td><td>110.0</td><td>102.1</td><td>12.2</td><td>1.0</td><td>0.9</td></tr>
+                                <tr><th>5</th><td>37.2</td><td>110.0</td><td>102.1</td><td>12.2</td><td>1.0</td><td>0.9</td></tr>
+                                <tr><th>6</th><td>37.2</td><td>110.0</td><td>102.1</td><td>12.2</td><td>1.0</td><td>0.9</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="p-xs-y-8 border-b bg-light">
+            <div class="container">
+                <h3 class="constrain text-xl text-center m-xs-b-6">
+                    Compile your assets using Laravel Elixir.
+                </h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="p-xs-b-6 p-md-y-6 p-lg-x-8">
+                            <p class="m-xs-b-4">
+                                Jigsaw bakes in support for Laravel Elixir so you can compile your CSS and Javascript assets the same way you're used to in Laravel.
+                            </p>
+                            <p>
+                                We also preconfigure Elixir to watch your Blade files so your site is rebuilt automatically when you make a change. Combined with out-of-the-box Browsersync support, previewing your changes quickly couldn't be easier.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <img src="/img/elixir-preprocessors.png" alt="Blade Code Sample" class="img-fit">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="p-xs-y-8 border-b bg-light">
+            <div class="container text-center">
+                <h3 class="text-xl m-xs-b-6">
+                    Ready to get started?
+                </h3>
+                <div>
+                    <a href="/demo" class="btn btn-lg btn-primary">
+                        Go to Demo!
+                    </a>
+                </div>
+            </div>
+        </section>
+{% endblock %}

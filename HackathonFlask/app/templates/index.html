@@ -1,93 +1,15 @@
 {% extends "layout.html" %}
 
-{% block css %}
-    <link rel="stylesheet" href="/static/css/main.css">
-{% endblock %}
-
-{% block js %}
-{% endblock %}
-
 {% block body %}
-        <section class="p-xs-y-8 border-t border-b bg-soft">
-            <div class="container">
-                <h3 class="constrain text-xl text-center m-xs-b-6">
-                    Blade templating, just like<br class="visible-xs-inline"> your Laravel apps.
-                </h3>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="p-xs-b-6 p-md-y-6 p-lg-x-8">
-                            <p class="m-xs-b-4">
-                                Blade is a powerful, simple, and beautiful templating language, but until now it wasn't an option if you were building a simple static site that didn't need a complex PHP backend.
-                            </p>
-                            <p>
-                                Jigsaw brings Blade to the static site world, so you can use the same templating engine for simple websites as you do for complex web applications.
-                            </p>
-                        </div>
-                    </div>
-                </div>
+<section class="p-xs-y-8 border-t border-b bg-soft">
+    <div class="container">
+        <h3 class="constrain text-xl text-center p-xs-b-6">
+            This is our home page.
+        </h3>
+        <div class="row">
+            <div class="col-md-6" style="height: 100px;">
             </div>
-        </section>
-        <section class="p-xs-y-8 border-b bg-light">
-            <div class="container">
-                <h3 class="constrain text-xl text-center m-xs-b-6">
-                    Use Markdown for<br class="visible-xs-inline"> content-driven pages.
-                </h3>
-                <div class="row">
-                    <div class="col-md-6">
-                    </div>
-                    <div class="col-md-6">
-                        <div class="p-xs-b-6 p-md-y-6 p-lg-x-8">
-                            <p class="m-xs-b-4">
-                                Markdown is a fantastic writing format for things like articles, blog posts, or documentation pages.
-                            </p>
-                            <p class="m-xs-b-4">
-                                Jigsaw makes it painless to create a layout in Blade, and fill it with content written in Markdown.
-                            </p>
-                            <p>
-                                <a href="/docs/markdown/" class="link-brand">
-                                    Learn more in the docs.
-                                </a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="p-xs-y-8 border-b bg-soft">
-            <div class="container">
-                <h3 class="constrain text-xl text-center m-xs-b-6">
-                    Compile your assets using Laravel Elixir.
-                </h3>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="p-xs-b-6 p-md-y-6 p-lg-x-8">
-                            <p class="m-xs-b-4">
-                                Jigsaw bakes in support for Laravel Elixir so you can compile your CSS and Javascript assets the same way you're used to in Laravel.
-                            </p>
-                            <p>
-                                We also preconfigure Elixir to watch your Blade files so your site is rebuilt automatically when you make a change. Combined with out-of-the-box Browsersync support, previewing your changes quickly couldn't be easier.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <img src="/img/elixir-preprocessors.png" alt="Blade Code Sample" class="img-fit">
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="p-xs-y-8 border-b bg-light">
-            <div class="container text-center">
-                <h3 class="text-xl m-xs-b-6">
-                    Ready to get started?
-                </h3>
-                <p class="constrain constrain-sm m-xs-b-6">
-                    Check out our installation instructions and you'll be up and running in no time.
-                </p>
-                <div>
-                    <a href="/docs/installation/" class="btn btn-lg btn-primary">
-                        Build your site
-                    </a>
-                </div>
-            </div>
-        </section>
+        </div>
+    </div>
+</section>
 {% endblock %}

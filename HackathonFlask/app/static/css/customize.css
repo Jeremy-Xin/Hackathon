@@ -1,0 +1,14 @@
+.feature-list
+{
+	list-style-type: circle;
+}
+
+.feature-list li
+{
+	margin: 5px 5px;
+}
+
+.bold
+{
+	font-weight: bolder;
+}
