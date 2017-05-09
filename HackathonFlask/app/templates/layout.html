@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Swim Rescue</title>
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    {% block css%}
+    <link rel="stylesheet" href="/static/css/main.css">
+    {% endblock %}
+</head>
+
+<body class="border-t-3 border-primary full-height flex-col">
+    <div class="flex-fit">
+        <header class="bg-hero p-xs-b-4">
+            <nav class="navbar navbar-brand">
+                <div class="container">
+                    <div class="navbar-content">
+                        <div>
+                            <a class="link-plain text-xxl flex-y-center" href="/">
+                                <img class="logo" src="/img/jigsaw-logo-440.png" width="220">
+                            </a>
+                        </div>
+                        <div class="navbar-buttons">
+                            <a href="/" class="link-brand m-xs-r-6">
+                                Introduction
+                            </a>
+                            <a href="/swimming" class="btn btn-primary-outline">
+                                Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <div class="container text-center">
+                <div class="constrain constrain-lg">
+                    <div class="m-xs-y-8">
+                        <h1 class="text-xjumbo m-xs-b-4">
+                            Static sites for Laravel developers
+                         </h1>
+                        <!-- <h2 class="text-lg">
+                            Jigsaw is a framework for rapidly building static sites using the same modern tooling that powers your web applications.
+                        </h2> -->
+                    </div>
+                </div>
+            </div>
+        </header>
+        {% block body %}
+        {% endblock %}
+    </div>
+    <footer class="bg-dark text-center p-xs-y-6 p-xs-x-4 text-light-muted text-sm">
+        <p>&copy; 2017 <a href="http://tighten.co" class="link-light-muted">Tighten Co.</a></p>
+    </footer>
+</body>
+{% block js%}
+{% endblock %}
+</html>
