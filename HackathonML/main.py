@@ -27,9 +27,9 @@ for e, t in zip(est, y_test):
 		s = s + 1
 print('test_accuracy={}'.format(s / len(y_test)))
 
-print(est)
-print(y_test)
+# print(est)
+# print(y_test)
 
-print(lr)
+# print(lr)
 
 
