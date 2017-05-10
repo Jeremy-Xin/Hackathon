@@ -1,6 +1,7 @@
 from threading import Thread, Event
 import random
 import time
+import csv
 
 class SwmmingPool(object):
 	_swimmers = []
@@ -31,6 +32,19 @@ class SwmmingPool(object):
 			if swimmer.sid == id:
 				swimmer.x = x
 				swimmer.y = y
+
+	def update_status(self, id, t, bp, hr, br, vs, hs):
+		for swimmer in self._swimmers:
+			if swimmer.sid == id:
+				swimmer.temperature = t
+				swimmer.blood_pressure = bp
+				swimmer.heart_rate = hr
+				swimmer.breathing_rate = br
+				swimmer.vertical_speed = vs
+				swimmer.horizontal_speed = hs
+				swimmer.swimming_by_self = False
+				# swimmer.is_drown = 
+
 
 	def __len__(self):
 		return len(self._swimmers)
@@ -76,7 +90,7 @@ class Swimmer(object):
 		self.breathing_rate = br
 		self.vertical_speed = vs
 		self.horizontal_speed = hs
-
+		# print(hr)
 
 
 	def swim(self):
@@ -110,7 +124,7 @@ class SwimPositionChanger(Thread):
 			if self._ispause:
 				self._flag.wait()
 			for swimmer in self._pool:
-				if swimmer.swimming_by_self:
+				if not swimmer.is_drown:
 					swimmer.swim()
 			time.sleep(1)
 
@@ -127,3 +141,39 @@ class SwimPositionChanger(Thread):
 
 	def is_started(self):
 		return self._isstarted
+
+
+class BodyStatusChanger(Thread):
+	def __init__(self, pool):
+		Thread.__init__(self)
+		self._pool = pool
+		self.setDaemon(True)
+		self.statistics = Statistics()
+
+
+	def run(self):
+		while True:
+			for swimmer in self._pool:
+				if swimmer.swimming_by_self and not swimmer.is_drown:
+					s = self.statistics.get_one()
+					swimmer.change_body_state(s[0], s[1], s[2], s[3], s[4], s[5])
+					# if swimmer.name == 'Jeremy':
+					# 	print(s)
+			time.sleep(2)
+
+
+class Statistics(object):
+	def __init__(self):
+		self.samples = []
+		with open('nega.csv', 'r') as f:
+			reader = csv.reader(f)
+			idx = 0
+			for row in reader:
+				self.samples.append(row)
+				idx += 1
+				if idx > 100:
+					break
+
+	def get_one(self):
+		idx = random.randint(1, len(self.samples) - 1)
+		return self.samples[idx]

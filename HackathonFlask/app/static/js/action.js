@@ -23,27 +23,26 @@ swimmings = initDataArray(swimmings);
 drownings = initDataArray(drownings);
 
 option = {
-    tooltip: {
-        trigger: 'item',
-        formatter: function(params, ticket, callback) {
-            data = params.data;
-            return 'x:' + data[0] +
-                '<br/> y:' + data[1] +
-                '<br/> heartbeat:' + data[2];
+    // backgroundColor: 'rgba(200, 255, 255, 0.5)',
+    title: {
+        text: 'Data Exchange Swimming Contest',
+        left: 'center',
+        textStyle: {
+            // color: '#fff'
         }
     },
-    label: {
-        show: true,
-        position: 'top',
-        // formatter: function(params) {
-        //     data = params.data;
-        //     return 'Swimmer';
-        // }
-        formatter: '{b}: {c}'
+    tooltip: {
+        trigger: 'item',
+        formatter: function(params) {
+            data = params.data;
+            return 'temperature:' + data[4] +
+                '<br>blood pressure:' + data[5] +
+                '<br>heart rate:' + data[6] +
+                '<br>breathing rate:' + data[7] +
+                '<br>virtical speed:' + data[8] +
+                '<br>horizontal speed:' + data[9];
+        }
     },
-    // legend: {
-    //     data: ['Swimmers']
-    // },
     xAxis: [{
         type: 'value',
         splitNumber: 1,
@@ -62,15 +61,15 @@ option = {
     series: [{
         name: 'Swimmers',
         type: 'scatter',
-        symbol: 'image://static/img/male_small.png',
+        symbol: 'image://static/img/swimmer.png',
         symbolSize: function(value) {
             if (value[0] < 0 || value[1] < 0) {
                 return 0;
             }
             if (value && value[3]) {
-                return [18,36];
+                return [45,36];
             }
-            return [18,36];
+            return [60,48];
         },
         data: swimmings,
         itemStyle: {
@@ -82,7 +81,7 @@ option = {
                     position: 'top',
                     formatter: function(params) {
                         data = params.data;
-                        return data[4];
+                        return data[2];
                     },
                     textStyle:{
                         color:'#000',
@@ -97,15 +96,15 @@ option = {
     },
     {
         name: 'Drowning',
-        type: 'scatter',
+        type: 'effectScatter',
         symbolSize: function(value) {
             if (value[0] < 0 || value[1] < 0) {
                 return 0;
             }
             if (value && value[3]) {
-                return 15;
+                return 25;
             }
-            return 25;
+            return 30;
         },
         data: drownings,
         label: {
@@ -114,8 +113,12 @@ option = {
                 position: 'top',
                 formatter: function(params) {
                     data = params.data;
-                    return data[4];
-                }
+                    return data[2] + '!!';
+                },
+                textStyle:{
+                        color:'#f00',
+                        fontSize: 25
+                    }
             }
         },
         itemStyle: {
@@ -132,7 +135,12 @@ option = {
             },
             hoverAnimation: true,
             zlevel: 1,
-        }
+        },
+        showEffectOn: 'render',
+        rippleEffect: {
+            brushType: 'stroke'
+        },
+        hoverAnimation: true,
     }   
     ]
 };
@@ -159,13 +167,23 @@ function updateChart(data) {
         var x = parseInt(s.x);
         var y = parseInt(s.y);
         var hr = parseInt(s.hr);
+        var t = parseInt(s.t);
+        var bp = parseInt(s.bp);
+        var br = parseInt(s.br);
+        var vs = parseInt(s.vs);
+        var hs = parseInt(s.hs);
         var stp = s.swimming_by_self;
         var name = s.name;
         swimmings[id][0] = x;
         swimmings[id][1] = y;
-        swimmings[id][2] = hr;
+        swimmings[id][2] = name;
         swimmings[id][3] = swimming_by_self;
-        swimmings[id][4] = name;
+        swimmings[id][4] = t;
+        swimmings[id][5] = bp;
+        swimmings[id][6] = hr;
+        swimmings[id][7] = br;
+        swimmings[id][8] = vs;
+        swimmings[id][9] = hs;
     }
     option.series[0].data = swimmings;
     for (var i = 0; i < dr.length; i++) {
@@ -174,13 +192,23 @@ function updateChart(data) {
         var x = parseInt(s.x);
         var y = parseInt(s.y);
         var hr = parseInt(s.hr);
+        var t = parseInt(s.t);
+        var bp = parseInt(s.bp);
+        var br = parseInt(s.br);
+        var vs = parseInt(s.vs);
+        var hs = parseInt(s.hs);
         var swimming_by_self = s.swimming_by_self;
         var name = s.name;
         drownings[id][0] = x;
         drownings[id][1] = y;
-        drownings[id][2] = hr;
+        drownings[id][2] = name;
         drownings[id][3] = swimming_by_self;
-        drownings[id][4] = name;
+        swimmings[id][4] = t;
+        swimmings[id][5] = bp;
+        swimmings[id][6] = hr;
+        swimmings[id][7] = br;
+        swimmings[id][8] = vs;
+        swimmings[id][9] = hs;
     }
     option.series[1].data = drownings;
     myChart.setOption(option);

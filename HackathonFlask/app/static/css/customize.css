@@ -12,3 +12,7 @@
 {
 	font-weight: bolder;
 }
+
+.container p, .container li {
+	font-size: 130%;
+}

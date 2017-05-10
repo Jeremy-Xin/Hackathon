@@ -1,16 +1,19 @@
 from flask import render_template, session, url_for, request
 import json
 import random
+import csv
 
 from . import main, models
 
 names = ['Jeremy', 'Michael', 'Alisa', 'Ben', 'Chaosong', 'Karen', 'Chen', 'Sam', 'Jeff', 'Apple']
 
+
+
 def initialize_swimmers():
 	for x in range(10):
 		s = models.Swimmer(x, random.randint(0, 100), random.randint(0, 50), names[x])
 		swimmingPool.add_swimmer(s)
-	d = models.Swimmer(10, random.randint(0, 100), random.randint(0, 50), "Drowning")
+	d = models.Swimmer(10, random.randint(0, 100), random.randint(0, 50), "Jeff")
 	d.is_drown = True
 	d.swimming_by_self = False
 	swimmingPool.add_swimmer(d)
@@ -18,7 +21,8 @@ def initialize_swimmers():
 swimmingPool = models.SwmmingPool()
 initialize_swimmers();
 positionChanger = models.SwimPositionChanger(swimmingPool)
-
+bodyStatusChanger = models.BodyStatusChanger(swimmingPool)
+bodyStatusChanger.start()
 
 @main.route('/', methods=['GET'])
 def index():
@@ -71,21 +75,23 @@ def swimmer_status():
 
 
 def serialize_pool(swimmingPool):
-    swimming = []
-    drowning = []
-    sid = 0
-    did = 0
-    for s in swimmingPool.get_swimmings():
-    	obj = {"sid": sid, "x": s.x, "y": s.y, "hr": s.heart_rate, "stop": s.swimming_by_self, "name": s.name, "identity": s.sid}
-    	swimming.append(obj)
-    	sid += 1
+	swimming = []
+	drowning = []
+	sid = 0
+	did = 0
+	for s in swimmingPool.get_swimmings():
+		obj = {"sid": sid, "x": s.x, "y": s.y, "hr": s.heart_rate, "swimming_by_self": s.swimming_by_self, "name": s.name, 
+		"identity": s.sid, "t": s.temperature, "bp": s.blood_pressure, "br": s.breathing_rate, "vs":s.vertical_speed, "hs":s.horizontal_speed}
+		swimming.append(obj)
+		sid += 1
 
 	for d in swimmingPool.get_drownings():
-		obj = {"sid": did, "x": d.x, "y": d.y, "hr": d.heart_rate, "stop": d.swimming_by_self, "name": d.name, "identity": s.sid}
+		obj = {"sid": did, "x": d.x, "y": d.y, "hr": d.heart_rate, "swimming_by_self": d.swimming_by_self, "name": d.name, 
+		"identity": s.sid, "t": d.temperature, "bp": d.blood_pressure, "br": d.breathing_rate, "vs":d.vertical_speed, "hs":d.horizontal_speed}
 		drowning.append(obj)
 		did += 1
 
-    return {'swimming':swimming, 'drowning':drowning}
+	return {'swimming':swimming, 'drowning':drowning}
 
 
 @main.route('/start_moving', methods=['GET'])
@@ -106,3 +112,9 @@ def stop_moving():
 @main.route('/test')
 def test():
 	return "Success"
+
+@main.route('/update_swimmer')
+def update_swimmer():
+	#get json data
+	params = []
+	swimmingPool.update(sid, *params)
