@@ -4,11 +4,16 @@ import random
 
 from . import main, models
 
+names = ['Jeremy', 'Michael', 'Alisa', 'Ben', 'Chaosong', 'Karen', 'Chen', 'Sam', 'Jeff', 'Apple']
+
 def initialize_swimmers():
 	for x in range(10):
-		s = models.Swimmer(x, random.randint(0, 100), random.randint(0, 50))
+		s = models.Swimmer(x, random.randint(0, 100), random.randint(0, 50), names[x])
 		swimmingPool.add_swimmer(s)
-
+	d = models.Swimmer(10, random.randint(0, 100), random.randint(0, 50), "Drowning")
+	d.is_drown = True
+	d.swimming_by_self = False
+	swimmingPool.add_swimmer(d)
 
 swimmingPool = models.SwmmingPool()
 initialize_swimmers();
@@ -26,7 +31,6 @@ def introduce():
 @main.route('/demo', methods=['GET'])
 def demo():
 	return render_template('demo.html')
-
 
 @main.route('/add', methods=['GET', 'POST'])
 def add_swimmer():
@@ -65,12 +69,23 @@ def swimmer_status():
 	return json.dumps(swimmingPool, default=serialize_pool)
 
 
+
 def serialize_pool(swimmingPool):
-    d = []
-    for s in swimmingPool:
-    	obj = {"sid": s.sid, "x": s.x, "y": s.y, "hb": s.heartbeat, "stop": s.stop}
-    	d.append(obj)
-    return d
+    swimming = []
+    drowning = []
+    sid = 0
+    did = 0
+    for s in swimmingPool.get_swimmings():
+    	obj = {"sid": sid, "x": s.x, "y": s.y, "hr": s.heart_rate, "stop": s.swimming_by_self, "name": s.name, "identity": s.sid}
+    	swimming.append(obj)
+    	sid += 1
+
+	for d in swimmingPool.get_drownings():
+		obj = {"sid": did, "x": d.x, "y": d.y, "hr": d.heart_rate, "stop": d.swimming_by_self, "name": d.name, "identity": s.sid}
+		drowning.append(obj)
+		did += 1
+
+    return {'swimming':swimming, 'drowning':drowning}
 
 
 @main.route('/start_moving', methods=['GET'])
@@ -87,3 +102,7 @@ def stop_moving():
 	if positionChanger.is_started() and not positionChanger.is_paused():
 		positionChanger.pause()
 	return "OK"
+
+@main.route('/test')
+def test():
+	return "Success"

@@ -38,15 +38,46 @@ class SwmmingPool(object):
 	def __iter__(self):
 		return iter(self._swimmers)
 
+	def get_swimmings(self):
+		l = []
+		for s in self._swimmers:
+		 	if not s.is_drown:
+		 		l.append(s)
+		return l
+
+	def get_drownings(self):
+		l = []
+		for s in self._swimmers:
+		 	if s.is_drown:
+		 		l.append(s)
+		return l
+
 
 class Swimmer(object):
-	def __init__(self, sid, x, y):
+	def __init__(self, sid, x, y, name, tp = 0, bp = 0, hr = 0, br = 0, vs = 0, hs = 0):
 		self.sid = sid
 		self.x = x
 		self.y = y
-		self.heartbeat = 70
-		self.stop = False
+		self.swimming_by_self = True
 		self.is_drown = False
+		self.name = name
+		self.temperature = tp
+		self.blood_pressure = bp
+		self.heart_rate = hr
+		self.breathing_rate = br
+		self.vertical_speed = vs
+		self.horizontal_speed = hs
+
+
+	def change_body_state(self, tp = 0, bp = 0, hr = 0, br = 0, vs = 0, hs = 0):
+		self.temperature = tp
+		self.blood_pressure = bp
+		self.heart_rate = hr
+		self.breathing_rate = br
+		self.vertical_speed = vs
+		self.horizontal_speed = hs
+
+
 
 	def swim(self):
 		self.x = self.x + random.randint(-1, 1)
@@ -79,7 +110,7 @@ class SwimPositionChanger(Thread):
 			if self._ispause:
 				self._flag.wait()
 			for swimmer in self._pool:
-				if not swimmer.stop:
+				if swimmer.swimming_by_self:
 					swimmer.swim()
 			time.sleep(1)
 
